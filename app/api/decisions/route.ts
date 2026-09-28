@@ -1,0 +1,2 @@
+import { NextRequest,NextResponse } from 'next/server';import { approveExpense,approveSale } from '@/lib/finance';
+export async function POST(req:NextRequest){try{const b=await req.json(),actor=req.headers.get('x-demo-employee');if(!actor)throw new Error('Select a demonstration role');const data=b.kind==='sale'?await approveSale(actor,b.reference,b.split):await approveExpense(actor,b.reference,b.allocation);return NextResponse.json({ok:true,data})}catch(e){return NextResponse.json({error:e instanceof Error?e.message:'Decision rejected'},{status:403})}}

@@ -1,0 +1,1 @@
+import './styles.css';export const metadata={title:'Friends Included Finance',description:'Wedding Guests for Hire financial ledger'};export default function Root({children}:{children:React.ReactNode}){return <html lang="en"><body>{children}</body></html>}

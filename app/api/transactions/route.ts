@@ -1,0 +1,2 @@
+import { NextRequest,NextResponse } from 'next/server';import { submitExpense,submitSale } from '@/lib/finance';
+export async function POST(req:NextRequest){try{const b=await req.json();const actor=req.headers.get('x-demo-employee');if(!actor)return NextResponse.json({error:'Select a demonstration role first'},{status:401});const data=b.kind==='sale'?await submitSale(actor,b,'web'):await submitExpense(actor,b,'web');return NextResponse.json({ok:true,data})}catch(e){return NextResponse.json({error:e instanceof Error?e.message:'Invalid transaction'},{status:400})}}
